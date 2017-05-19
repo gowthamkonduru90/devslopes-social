@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import FBSDKCoreKit
+import Firebase
 
 class SignInVC: UIViewController {
 
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var pwdField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +26,68 @@ class SignInVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func facebookBtnTapped(_ sender: Any) {
+        let facebookLogin = FBSDKLoginManager()
+        facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            if error != nil {
+                print("------------FB Error------")
+                print("Dileep: Unable to authenticate with facebook - \(error!)")
+                print("------------------------")
+            } else if result?.isCancelled == true {
+                print("--------FB Cancel-----")
+                print("Dileep: User Cancelled authentication with Facebook ")
+                print("----------------------------")
+            }else {
+                print("--------FB Authenticated--------")
+                print("Dileep: Successfully authenticated with Facebook ")
+                print("---------------------------")
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                self.firebaseAuth(credential)
+            }
+        }
+    }
+    
+    
+    func firebaseAuth(_ credential: FIRAuthCredential) {
+        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            if error != nil {
+                print("------------FireBase Error----")
+                print("Dileep: Unable to authenticate with Firebase\(error!)")
+                print("--------------------------")
+            } else {
+                print("------------FireBase Authenticated----")
+                print("Dileep: Successfully User authenticated with Firebase ")
+                print("-------------------------------------")
+            }
+        })
+    }
+    
+    
+    @IBAction func singInTapped(_ sender: Any) {
+        if let email = emailField.text, let pwd = pwdField.text {
+            FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
+                if error == nil {
+                    print("########FireBase Authenticated#######")
+                    print("Dileep: Email User authenticated with Firebase ")
+                } else {
+                    FIRAuth.auth()?.createUser(withEmail: email, password: pwd, completion: { (user, error) in
+                        if error != nil {
+                            print("########FireBase Failed to Create Email #######")
+                            print("Dileep: Unable to authenticate with Firebase using Email")
+                        } else {
+                            print("########FireBase Created User and Authenticated#######")
+                            print("Dileep: Successfully authenticated with Firebase ")
+                        }
+                    })
+                }
+            })
+        }
+        
+        
+    }
+    
+    
+    
 
 }
 
