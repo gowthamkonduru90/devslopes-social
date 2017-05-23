@@ -50,7 +50,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.00076923088306601883" green="0.73444782983411416" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="KY8-vp-otZ"/>
                                     <constraint firstAttribute="trailing" secondItem="rUI-nH-Yle" secondAttribute="trailing" constant="8" id="Yx0-ZT-vh8"/>
@@ -131,11 +131,46 @@
                     <connections>
                         <outlet property="emailField" destination="oK3-yT-Fiw" id="ocb-qQ-yKQ"/>
                         <outlet property="pwdField" destination="XFR-l0-NcM" id="tS5-DL-zzT"/>
+                        <segue destination="8oW-OE-kiz" kind="show" identifier="goToFeed" id="39y-v8-Y14"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+        <!--FeedVC-->
+        <scene sceneID="Ufs-jd-zlC">
+            <objects>
+                <viewController id="8oW-OE-kiz" customClass="FeedVC" customModule="devslopes_social" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uwf-71-Kv4"/>
+                        <viewControllerLayoutGuide type="bottom" id="KaR-qy-Wen"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NMK-dF-EFr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhy-zL-ZcQ">
+                                <rect key="frame" x="164" y="318" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Sign Out">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOutTapped:" destination="8oW-OE-kiz" eventType="touchUpInside" id="g7W-bC-zDz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToSignIn" id="juE-Mq-2tU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wuf-1M-PPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925.60000000000002" y="138.98050974512745"/>
         </scene>
     </scenes>
     <resources>

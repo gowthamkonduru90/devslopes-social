@@ -10,6 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
 import Firebase
+import SwiftKeychainWrapper
 
 class SignInVC: UIViewController {
 
@@ -19,6 +20,14 @@ class SignInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            performSegue(withIdentifier: "goToFeed", sender: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +67,10 @@ class SignInVC: UIViewController {
                 print("------------FireBase Authenticated----")
                 print("Dileep: Successfully User authenticated with Firebase ")
                 print("-------------------------------------")
+                if let user = user {
+                    self.completeSignIn(id: user.uid)
+                }
+
             }
         })
     }
@@ -77,6 +90,7 @@ class SignInVC: UIViewController {
                         } else {
                             print("########FireBase Created User and Authenticated#######")
                             print("Dileep: Successfully authenticated with Firebase ")
+                            self.completeSignIn(id: (user?.uid)!)
                         }
                     })
                 }
@@ -87,6 +101,19 @@ class SignInVC: UIViewController {
     }
     
     
+    
+    func completeSignIn(id: String) {
+    //KeychainWrapper.setString(user?.uid, forKey: KEY_UID)
+    
+        //var accessibility: KeychainItemAccessibility? = nil
+       // KeychainWrapper.set(id, forKey: KEY_UID, accessibility)
+        
+     let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
+        print("########Keychain Saved Data#######")
+        print("Dileep: Data saved to keychain: \(keychainResult)")
+        performSegue(withIdentifier: "goToFeed", sender: nil)
+    
+    }
     
 
 }
