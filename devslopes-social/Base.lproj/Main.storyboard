@@ -188,11 +188,15 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-MZ-LeM">
                                         <rect key="frame" x="8" y="8" width="327" height="49"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-image" translatesAutoresizingMaskIntoConstraints="NO" id="6Hi-Xm-WUj">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-image" translatesAutoresizingMaskIntoConstraints="NO" id="6Hi-Xm-WUj" customClass="CircleView" customModule="devslopes_social" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="49"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="qK2-bJ-egt"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="bSo-1R-M0J" appends="YES" id="i3t-L8-YCP"/>
+                                                </connections>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a caption" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TEZ-Sq-F70" customClass="FancyField" customModule="devslopes_social" customModuleProvider="target">
                                                 <rect key="frame" x="50" y="0.0" width="237" height="49"/>
@@ -239,7 +243,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYp-lc-JfT">
                                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="Yio-6U-a8c" customClass="CircleView" customModule="devslopes_social" customModuleProvider="target">
+                                                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="Yio-6U-a8c" customClass="CircleView" customModule="devslopes_social" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="60" id="3fi-lt-p76"/>
@@ -339,6 +343,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageAdd" destination="6Hi-Xm-WUj" id="bfP-op-MSu"/>
                         <outlet property="tableView" destination="vPu-tA-2ON" id="FZV-7L-W0i"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="goToSignIn" id="juE-Mq-2tU"/>
                     </connections>
@@ -347,6 +352,11 @@
                 <tapGestureRecognizer id="2gQ-Rc-Ilo">
                     <connections>
                         <action selector="signOutTapped:" destination="8oW-OE-kiz" id="qDb-LJ-t2X"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="bSo-1R-M0J">
+                    <connections>
+                        <action selector="addImageTapped1:" destination="8oW-OE-kiz" id="Z3A-Uq-G5J"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
